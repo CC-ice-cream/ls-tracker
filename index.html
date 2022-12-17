@@ -10,40 +10,76 @@
         width: 200px;
         height: 200px;
       }
+      .container {
+        /* height: 200px; */
+        padding: 0 200px 0 100px;
+        overflow: hidden;
+      }
+      .center {
+        float: left;
+        width: 100%;
+        height: 200px;
+        background-color: aqua;
+      }
+      .left {
+        width: 100px;
+        height: 200px;
+        background-color: bisque;
+        position: relative;
+        left: -100px;
+        /* margin-left: -100%; */
+      }
+      .right {
+        width: 200px;
+        height: 200px;
+        background-color: cadetblue;
+        position: relative;
+        right: -200px;
+      }
     </style>
   </head>
   <body>
-    <script src="./lsTracker/dist/index.js"></script>
-    <button target-key="btn">button</button>
+    <script src="./dist/index.js"></script>
+    <div class="container">
+      <div class="center">center</div>
+      <div class="left">left</div>
+      
+      <div class="right">right</div>
+    </div>
+    <!-- <button target-key="btn">button</button>
     <button id="warnBtn">warn button</button>
-    <img src="" alt="" srcset="" class="bad-img" />
+    <button id="hrefBtn">href button</button> -->
+    <!-- <img
+      src="./1387142244-5a75a1f21e0d8.png"
+      alt=""
+      srcset=""
+      class="bad-img"
+    /> -->
     <script>
-      new tracker({
-        requestUrl: "http://localhost:9000/api/tracker",
-        historyTracker: true,
-        domTracker: true,
-        jsError: true,
-      });
-      const badImg = document.querySelector(".bad-img");
-      document.getElementById("warnBtn").addEventListener(
-        "click",
-        function () {
-          throw "报错"
-          // try{
-          //   throw "报错"
-          // }catch(e){
-          //   console.log(e)
-          //   Promise.reject(e)
-          // }
-          // badImg.setAttribute("src", "i-dont-exist");
-        },
-        false
-      );
-
-      // window.addEventListener("error", (event) => {
-      //   log.textContent = log.textContent + `${event.type}: Loading image\n`;
-      //   console.log(event);
+      // new tracker({
+      //   requestUrl: "http://localhost:9000/api/tracker",
+      //   historyTracker: true,
+      //   domTracker: true,
+      //   jsError: true,
       // });
+      // const badImg = document.querySelector(".bad-img");
+      // document.getElementById("warnBtn").addEventListener(
+      //   "click",
+      //   function () {
+      //     // throw "报错"
+      //     badImg.setAttribute("src", "i-dont-exist");
+      //     var a = new Error("错误测试");
+      //     throw a;
+      //   },
+      //   false
+      // );
+      // document.getElementById("hrefBtn").addEventListener(
+      //   "click",
+      //   function () {
+      //     history.pushState("a", "title", "/a");
+      //   },
+      //   false
+      // );
     </script>
   </body>
 </html>

@@ -37,6 +37,7 @@
        * @return {*}
        */
       initDef() {
+          //pushState,replaceState 事件无法监听 需要重写该函数，加入自定义监听事件
           window.history["pushState"] = createHistoryEvent("pushState");
           window.history["replaceState"] = createHistoryEvent("replaceState");
           return {
@@ -78,7 +79,7 @@
           });
       }
       /**
-       * @description: 捕获异常事件 自动捕获
+       * @description: 路由劫持 捕获异常事件 自动捕获
        * @param mousueEventList 监听事件列表
        * @param trgetKey key 由后端指定
        * @param data
@@ -86,8 +87,7 @@
        */
       captureEvent(mousueEventList, trgetKey, data) {
           mousueEventList.forEach((event) => {
-              window.addEventListener(event, () => {
-                  // console.log("TRACKER Message: addEventListener: ", event);
+              window.addEventListener(event, (e) => {
                   this.reportTracker({
                       event,
                       trgetKey,
@@ -122,14 +122,13 @@
       }
       errorEvent() {
           window.addEventListener('error', (event) => {
-              console.log(event);
               let message;
               let target = event.target;
               if (event.target !== window) {
-                  message = `className {${target.className}};tagName {${target.tagName}}`;
+                  message = `${event.message};className='${target.className}';tagName='{${target.tagName}}'`;
               }
               else {
-                  message = `${event.message}; lineno: ${event.lineno}`;
+                  message = `${event.message};filename:${event.filename};lineno: ${event.lineno};colno:${event.colno}`;
               }
               this.reportTracker({
                   event: "error",
@@ -154,7 +153,8 @@
        * @param data
        */
       reportTracker(data) {
-          const params = Object.assign(this.data, data, {
+          let params = {};
+          params = Object.assign(params, this.data, data, {
               time: new Date().getTime(),
           });
           let header = {

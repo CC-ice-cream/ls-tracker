@@ -16,6 +16,7 @@ export default class Tracker {
    * @return {*}
    */
   private initDef(): DefaultOptions {
+    //pushState,replaceState 事件无法监听 需要重写该函数，加入自定义监听事件
     window.history["pushState"] = createHistoryEvent("pushState");
     window.history["replaceState"] = createHistoryEvent("replaceState");
     return <DefaultOptions>(<unknown>{
@@ -61,7 +62,7 @@ export default class Tracker {
   }
 
   /**
-   * @description: 捕获异常事件 自动捕获
+   * @description: 路由劫持 捕获异常事件 自动捕获
    * @param mousueEventList 监听事件列表
    * @param trgetKey key 由后端指定
    * @param data
@@ -73,8 +74,7 @@ export default class Tracker {
     data?: T
   ) {
     mousueEventList.forEach((event) => {
-      window.addEventListener(event, () => {
-        // console.log("TRACKER Message: addEventListener: ", event);
+      window.addEventListener(event, (e) => {
         this.reportTracker({
           event,
           trgetKey,
@@ -115,13 +115,12 @@ export default class Tracker {
 
   private errorEvent(){
     window.addEventListener('error', (event) => {
-      console.log(event)
       let message:string;
       let target = <HTMLElement>event.target;
       if(event.target !== window){
-        message = `className {${target.className}};tagName {${target.tagName}}`
+        message = `${event.message};className='${target.className}';tagName='{${target.tagName}}'`
       }else{
-        message = `${event.message}; lineno: ${event.lineno}`
+        message = `${event.message};filename:${event.filename};lineno: ${event.lineno};colno:${event.colno}`
       }
       this.reportTracker({
         event: "error",
@@ -148,7 +147,8 @@ export default class Tracker {
    * @param data 
    */
   private reportTracker<T>(data: T) {
-    const params = Object.assign(this.data, data, {
+    let params = {};
+    params = Object.assign(params,this.data, data, {
       time: new Date().getTime(),
     });
     let header = {

@@ -44,7 +44,7 @@ declare class Tracker {
      */
     private targetKeyReport;
     /**
-     * @description: 捕获异常事件 自动捕获
+     * @description: 路由劫持 捕获异常事件 自动捕获
      * @param mousueEventList 监听事件列表
      * @param trgetKey key 由后端指定
      * @param data

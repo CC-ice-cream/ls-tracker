@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .bad-img {
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="./lsTracker/dist/index.js"></script>
+    <button target-key="btn">button</button>
+    <button id="warnBtn">warn button</button>
+    <img src="" alt="" srcset="" class="bad-img" />
+    <script>
+      new tracker({
+        requestUrl: "http://localhost:9000/api/tracker",
+        historyTracker: true,
+        domTracker: true,
+        jsError: true,
+      });
+      const badImg = document.querySelector(".bad-img");
+      document.getElementById("warnBtn").addEventListener(
+        "click",
+        function () {
+          throw "报错"
+          // try{
+          //   throw "报错"
+          // }catch(e){
+          //   console.log(e)
+          //   Promise.reject(e)
+          // }
+          // badImg.setAttribute("src", "i-dont-exist");
+        },
+        false
+      );
+
+      // window.addEventListener("error", (event) => {
+      //   log.textContent = log.textContent + `${event.type}: Loading image\n`;
+      //   console.log(event);
+      // });
+    </script>
+  </body>
+</html>

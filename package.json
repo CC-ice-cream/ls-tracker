@@ -1,10 +1,10 @@
 {
   "name": "ls-tracker",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "browser": "dist/index.js",
+  "module": "dist/index.js",
+  "browser": "dist/index.umd.js",
   "scripts": {
     "build": "rollup -c"
   },
@@ -20,6 +20,7 @@
   ],
   "license": "ISC",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.0",
     "rollup": "^3.7.4",
     "rollup-plugin-dts": "^5.0.0",
     "rollup-plugin-typescript2": "^0.34.1",

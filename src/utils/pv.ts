@@ -4,7 +4,7 @@
  * @return {*}
  */
 export const createHistoryEvent = <T extends keyof History>(type: T) => {
-  const origin = history[type];
+  const origin = window.history[type];
 
   return function (this: any) {
     const result = origin.apply(this, arguments);

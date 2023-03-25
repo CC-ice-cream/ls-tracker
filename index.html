@@ -1,78 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      .bad-img {
-        width: 200px;
-        height: 200px;
-      }
-      .container {
-        /* height: 200px; */
-        padding: 0 200px 0 100px;
-        overflow: hidden;
-      }
-      .center {
-        float: left;
-        width: 100%;
-        height: 200px;
-        background-color: aqua;
-      }
-      .left {
-        width: 100px;
-        height: 200px;
-        background-color: bisque;
-        position: relative;
-        left: -100px;
-        /* margin-left: -100%; */
-      }
-      .right {
-        width: 200px;
-        height: 200px;
-        background-color: cadetblue;
-        position: relative;
-        right: -200px;
-      }
-    </style>
-  </head>
-  <body>
-    <script src="./dist/index.js"></script>
-    <div class="container">
-      <div class="center">center</div>
-      <div class="left">left</div>
-      
-      <div class="right">right</div>
-    </div>
-    <!-- <button target-key="btn">button</button>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .bad-img {
+      width: 200px;
+      height: 200px;
+    }
+
+    .container {
+      /* height: 200px; */
+      padding: 0 200px 0 100px;
+      overflow: hidden;
+    }
+
+    .center {
+      float: left;
+      width: 100%;
+      height: 200px;
+      background-color: aqua;
+    }
+
+    .left {
+      width: 100px;
+      height: 200px;
+      background-color: bisque;
+      position: relative;
+      left: -100px;
+      /* margin-left: -100%; */
+    }
+
+    .right {
+      width: 200px;
+      height: 200px;
+      background-color: cadetblue;
+      position: relative;
+      right: -200px;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="./dist/index.umd.js" type="module"></script>
+  <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+  <!-- <div class="container">
+    <div class="center">center</div>
+    <div class="left">left</div>
+
+    <div class="right">right</div>
+  </div> -->
+  <button target-key="btn">button</button>
     <button id="warnBtn">warn button</button>
-    <button id="hrefBtn">href button</button> -->
-    <!-- <img
+    <button id="hrefBtn">href button</button>
+  <img
       src="./1387142244-5a75a1f21e0d8.png"
       alt=""
       srcset=""
       class="bad-img"
-    /> -->
-    <script>
-      // new tracker({
-      //   requestUrl: "http://localhost:9000/api/tracker",
-      //   historyTracker: true,
-      //   domTracker: true,
-      //   jsError: true,
-      // });
+    />
+  <script type="module">
+    // console.log(generalTracker)
+    // import { generalTracker } from "./dist/index.js"
+    console.log(window)
+    const {generalTracker} = tracker
+      new generalTracker({
+        requestUrl: "http://localhost:9000/api/tracker",
+        historyTracker: true,
+        domTracker: true,
+        jsError: true,
+      });
       // const badImg = document.querySelector(".bad-img");
-      // document.getElementById("warnBtn").addEventListener(
-      //   "click",
-      //   function () {
-      //     // throw "报错"
-      //     badImg.setAttribute("src", "i-dont-exist");
-      //     var a = new Error("错误测试");
-      //     throw a;
-      //   },
-      //   false
-      // );
+      document.getElementById("warnBtn").addEventListener(
+        "click",
+        function () {
+          // throw "报错"
+          badImg.setAttribute("src", "i-dont-exist");
+          var a = new Error("错误测试");
+          throw a;
+        },
+        false
+      );
       // document.getElementById("hrefBtn").addEventListener(
       //   "click",
       //   function () {
@@ -80,6 +91,7 @@
       //   },
       //   false
       // );
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>
